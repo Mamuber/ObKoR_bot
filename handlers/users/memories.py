@@ -5,7 +5,7 @@ from aiogram import Bot
 from aiogram.dispatcher.filters import Command
 from aiogram.types import Message, CallbackQuery, inline_keyboard,message
 
-from keyboards.inline.choice_buttons import choice, menu
+from keyboards.inline.choice_buttons import choice, menu,farm_doors, city_doors
 from loader import dp
 
 @dp.message_handler(Command("start"))
@@ -19,12 +19,23 @@ async def show_memories(message: Message):
 async def show_memories(message: Message):
    await message.answer(text="Меню", reply_markup=menu)
 
-
 @dp.callback_query_handler(text=["menu"])
 async def close_garage_door(call: CallbackQuery):
     await call.answer(cache_time=3)
     callback_data =  call.data
-    await call.message.answer(text="Вот список того что у меня есть:",reply_markup=choice)
+    await call.message.answer(text="Меню:",reply_markup=choice)
+
+
+@dp.callback_query_handler(text=["farm"])
+async def close_garage_door(call: CallbackQuery):
+    await call.answer(cache_time=3)
+    callback_data =  call.data
+    await call.message.answer(text="Двери на даче ",reply_markup=farm_doors)
+@dp.callback_query_handler(text=["city"])
+async def close_garage_door(call: CallbackQuery):
+    await call.answer(cache_time=3)
+    callback_data =  call.data
+    await call.message.answer(text="Двери на даче ",reply_markup=city_doors)
 
 @dp.callback_query_handler(text_contains=["garage"])
 async def close_garage_door(call: CallbackQuery):
@@ -60,7 +71,7 @@ async def close_garage_door(call: CallbackQuery):
     await call.message.answer("Красавчик ты ТОЧНО закрыл КАЛИТКУ "+ date, reply_markup=menu)
     await Bot
 
-@dp.callback_query_handler(text_contains="villa_home")
+@dp.callback_query_handler(text_contains="villa_villa")
 async def close_garage_door(call: CallbackQuery):
     date = str(datetime.now())
     await call.answer(cache_time=3)
