@@ -69,7 +69,6 @@ async def close_garage_door(call: CallbackQuery):
     await call.answer(cache_time=3)
     callback_data =  call.data
     await call.message.answer("Красавчик ты ТОЧНО закрыл КАЛИТКУ "+ date, reply_markup=menu)
-    await Bot
 
 @dp.callback_query_handler(text_contains="villa_villa")
 async def close_garage_door(call: CallbackQuery):
